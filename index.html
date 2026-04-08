@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>SignalLoop | AI Meeting Copilot for Revenue Teams</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
+    :root {
+      --color-navy: #1a2238;
+      --color-electric-blue: #007fff;
+      --color-green: #3bd77a;
+      --color-bg: #f9fafb;
+      --color-text: #333;
+      --color-text-muted: #666;
+    }
+    *, *::before, *::after {
+      box-sizing: border-box;
+    }
+    body {
+      margin: 0;
+      font-family: 'Inter', sans-serif;
+      background: var(--color-bg);
+      color: var(--color-text);
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      line-height: 1.5;
+    }
+    a {
+      color: var(--color-electric-blue);
+      text-decoration: none;
+      font-weight: 600;
+    }
+    a:hover, a:focus {
+      text-decoration: underline;
+    }
+    h1,h2,h3 {
+      margin-top: 0;
+      font-weight: 700;
+      color: var(--color-navy);
+      line-height: 1.2;
+    }
+    h1 {
+      font-size: 2.5rem;
+      letter-spacing: -0.02em;
+      margin-bottom: 0.5rem;
+    }
+    h2 {
+      font-size: 1.75rem;
+      margin-bottom: 1rem;
+      margin-top: 4rem;
+    }
+    h3 {
+      font-size: 1.25rem;
+      margin-bottom: 0.5rem;
+    }
+    p {
+      color: var(--color-text-muted);
+      font-size: 1rem;
+      margin-top: 0;
+      margin-bottom: 1.25rem;
+      max-width: 600px;
+    }
+    button {
+      cursor: pointer;
+      border-radius: 6px;
+      border: none;
+      font-weight: 700;
+      font-size: 1rem;
+      padding: 1rem 2rem;
+      background-color: var(--color-electric-blue);
+      color: white;
+      transition: background-color 0.2s ease-in-out;
+      box-shadow: 0 4px 15px rgb(0 127 255 / 0.4);
+    }
+    button:hover, button:focus {
+      background-color: #0066cc;
+      box-shadow: 0 6px 20px rgb(0 102 204 / 0.6);
+      outline: none;
+    }
+    header {
+      background-color: var(--color-navy);
+      color: white;
+      padding: 2rem 1rem;
+      text-align: center;
+      box-shadow: 0 2px 8px rgb(0 0 0 / 0.12);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    main {
+      max-width: 960px;
+      margin: 2rem auto;
+      padding: 0 1rem 4rem;
+    }
+    .hero {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2.5rem;
+      align-items: center;
+      margin-bottom: 3rem;
+    }
+    @media (max-width: 768px) {
+      .hero {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+      }
+    }
+    .hero-copy {
+      max-width: 500px;
+    }
+    .hero-copy p {
+      font-size: 1.1rem;
+      margin-bottom: 1.5rem;
+      color: #444;
+    }
+    .hero-cta {
+      margin-top: 1.5rem;
+    }
+    .hero-image {
+      background: var(--color-navy);
+      border-radius: 12px;
+      box-shadow: 0 10px 30px rgb(0 0 0 / 0.15);
+      color: white;
+      padding: 2rem;
+      font-family: monospace;
+      font-size: 0.85rem;
+      line-height: 1.3;
+      height: 300px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      overflow: hidden;
+      user-select: none;
+      letter-spacing: 0.02em;
+    }
+    .hero-image span {
+      color: var(--color-electric-blue);
+      font-weight: 700;
+    }
+    section {
+      padding-top: 1rem;
+    }
+    .features {
+      display: flex;
+      gap: 2rem;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      margin-top: 2rem;
+    }
+    .feature {
+      background: white;
+      box-shadow: 0 4px 16px rgb(0 0 0 / 0.08);
+      border-radius: 10px;
+      flex: 1 1 280px;
+      padding: 1.5rem;
+      transition: box-shadow 0.2s ease-in-out;
+    }
+    .feature:hover, .feature:focus-within {
+      box-shadow: 0 6px 24px rgb(0 0 0 / 0.18);
+    }
+    .feature h3 {
+      color: var(--color-electric-blue);
+    }
+    ul {
+      padding-left: 1.25rem;
+    }
+    ul li {
+      margin-bottom: 0.7rem;
+      color: var(--color-text-muted);
+      font-size: 0.95rem;
+    }
+    footer {
+      text-align: center;
+      padding: 2rem 1rem;
+      font-size: 0.9rem;
+      color: var(--color-text-muted);
+      border-top: 1px solid #ddd;
+      margin-top: 4rem;
+    }
+    .trust {
+      margin-top: 3rem;
+      display: flex;
+      justify-content: center;
+      gap: 2.5rem;
+      flex-wrap: wrap;
+      color: var(--color-text-muted);
+      font-size: 0.875rem;
+    }
+    .trust > div {
+      background: white;
+      box-shadow: 0 2px 10px rgb(0 0 0 / 0.06);
+      border-radius: 8px;
+      padding: 1rem 1.5rem;
+      min-width: 140px;
+      text-align: center;
+    }
+    .cta-section {
+      margin-top: 3rem;
+      text-align: center;
+    }
+    .cta-section p {
+      max-width: 500px;
+      margin-left: auto;
+      margin-right: auto;
+      color: #444;
+      font-size: 1.1rem;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>SignalLoop</h1>
+  </header>
+  <main>
+    <section class="hero" aria-label="Product overview">
+      <div class="hero-copy">
+        <h1>Stop Turning Meetings Into Admin</h1>
+        <p>SignalLoop is the AI meeting copilot that turns every call into CRM updates, follow-ups, and coaching signals — so revenue teams spend less time on manual work and more time moving deals forward.</p>
+        <div class="hero-cta">
+          <a href="mailto:raphael@baget.ai"><button>Book a Demo</button></a>
+        </div>
+      </div>
+      <div class="hero-image" aria-hidden="true">
+        <div>
+          <p>&gt; Meeting Capture — All platforms supported: <span>Zoom, Google Meet, Teams</span></p>
+          <p>&gt; AI-Powered <span>Summaries & Action Items</span></p>
+          <p>&gt; CRM-Ready <span>Notes & Follow-ups</span></p>
+          <p>&gt; Coaching Signals & <span>Deal Risk Flags</span></p>
+          <p>&gt; Workflow Automation for <span>Revenue Teams</span></p>
+        </div>
+      </div>
+    </section>
+    <section aria-label="Key features">
+      <h2>Turn Calls Into Pipeline Progress With These Key Features</h2>
+      <div class="features">
+        <article class="feature">
+          <h3>Automatic Meeting Capture</h3>
+          <p>Capture calls seamlessly across Zoom, Google Meet, and Microsoft Teams without interruptions or extra setup.</p>
+        </article>
+        <article class="feature">
+          <h3>AI-Generated Summaries & Action Items</h3>
+          <p>Get accurate meeting summaries, next steps with owner assignments, and clear follow-up tasks generated automatically.</p>
+        </article>
+        <article class="feature">
+          <h3>CRM-Ready Outputs</h3>
+          <p>Automatically format notes and updates ready to sync with your CRM — reducing manual entry and improving pipeline hygiene.</p>
+        </article>
+        <article class="feature">
+          <h3>Coaching & Deal Insights</h3>
+          <p>Spot deal risks and coaching opportunities with AI-driven insights tailored for revenue teams and managers.</p>
+        </article>
+      </div>
+    </section>
+    <section aria-label="Why SignalLoop" style="margin-top:3rem;">
+      <h2>Why Revenue Teams Choose SignalLoop</h2>
+      <ul>
+        <li>Work consistently across all major meeting platforms — no silos or lost data</li>
+        <li>Cut post-call admin time by automating notes, follow-ups, and CRM updates</li>
+        <li>Improve coaching with clear insights and flags on deal health and next steps</li>
+        <li>Scale easily with simple subscription pricing and enterprise-grade security options</li>
+      </ul>
+    </section>
+    <section aria-label="Customer trust and validation" class="trust">
+      <div>Trusted by revenue teams at startups and mid-market companies</div>
+      <div>Security and compliance you can count on with SSO and retention controls</div>
+      <div>Partnered with RevOps consultants for seamless onboarding and success</div>
+    </section>
+    <section class="cta-section">
+      <h2>Ready to turn every meeting into action?</h2>
+      <p>Book a demo today and see how SignalLoop can save your team hours of manual work each week while keeping your pipeline accurate and actionable.</p>
+      <a href="mailto:raphael@baget.ai"><button>Book a Demo</button></a>
+    </section>
+  </main>
+  <footer aria-label="Footer">
+    <p>&copy; 2025 SignalLoop. All rights reserved.</p>
+  </footer>
+</body>
+</html>
